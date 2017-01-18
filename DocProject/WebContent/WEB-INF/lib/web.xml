@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<!DOCTYPE web-app 
+  PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" 
+  "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+	<filter>
+		<filter-name>Set Character Encoding</filter-name>
+		<filter-class>esunbank.esundoc.util.SetCharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>Set Character Encoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>InitService</servlet-name>
+		<servlet-class>
+			esunbank.esundoc.util.InitService
+		</servlet-class>
+		<init-param>
+			<param-name>dB_ServerIP</param-name> <!-- DB address -->
+			<param-value>172.19.246.22</param-value>
+		</init-param>
+		<init-param>
+			<param-name>dB_ID</param-name> <!-- DB user -->
+			<param-value>sa</param-value>
+		</init-param>
+		<init-param>
+			<param-name>dB_PassWD_IV</param-name> <!-- DB password -->
+			<param-value>13131313</param-value>
+		</init-param>
+		<init-param>
+			<param-name>dB_DatabaseName</param-name> <!-- DB Name -->
+			<param-value>EsunDoc</param-value>
+		</init-param>
+		<init-param>
+			<param-name>dB_ServerPort</param-name> <!-- DB port -->
+			<param-value>1433</param-value>
+		</init-param>
+		<init-param>
+			<param-name>SSO</param-name>
+			<param-value>http://172.19.203.18/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>ENVIRONMENT</param-name>
+			<param-value>T</param-value>
+		</init-param>
+		<init-param>
+			<param-name>logFile</param-name> <!-- log FileName -->
+			<param-value>EsunDoc</param-value>
+		</init-param>
+		<init-param>
+			<param-name>systemID</param-name>
+			<param-value>EsunDoc</param-value>
+		</init-param>
+
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>
+			UpdSysUserServlet
+		</servlet-name>
+		<servlet-class>
+			esunbank.esundoc.action.UpdSysUserServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>
+			AddSysUserServlet
+		</servlet-name>
+		<servlet-class>
+			esunbank.esundoc.action.AddSysUserServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>
+			AddDocTypeServlet
+		</servlet-name>
+		<servlet-class>
+			esunbank.esundoc.action.AddDocTypeServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>
+			CompareUserIDServlet
+		</servlet-name>
+		<servlet-class>
+			esunbank.esundoc.action.CompareUserIDServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>
+			AddDocCtlServlet
+		</servlet-name>
+		<servlet-class>
+			esunbank.esundoc.action.AddDocCtlServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>
+			AddDocDtlServlet
+		</servlet-name>
+		<servlet-class>
+			esunbank.esundoc.action.AddDocDtlServlet
+		</servlet-class>
+	</servlet>
+
+
+	<servlet>
+		<servlet-name>
+			FileDownloadServlet
+		</servlet-name>
+		<servlet-class>
+			esunbank.esundoc.action.FileDownloadServlet
+		</servlet-class>
+	</servlet>
+
+
+	<servlet>
+		<servlet-name>
+			UpdUserAuthServlet
+		</servlet-name>
+		<servlet-class>
+			esunbank.esundoc.action.UpdUserAuthServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>
+			DeleteDocDtlServlet
+		</servlet-name>
+		<servlet-class>
+			esunbank.esundoc.action.DeleteDocDtlServlet
+		</servlet-class>
+	</servlet>
+
+
+	<servlet>
+		<servlet-name>
+			DymaticDocTypeServlet
+		</servlet-name>
+		<servlet-class>
+			esunbank.esundoc.action.DymaticDocTypeServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>
+			ManageDocTypeServlet
+		</servlet-name>
+		<servlet-class>
+			esunbank.esundoc.action.ManageDocTypeServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>
+			DeleteDocCtlServlet
+		</servlet-name>
+		<servlet-class>
+			esunbank.esundoc.action.DeleteDocCtlServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>
+			memoDownloadServlet
+		</servlet-name>
+		<servlet-class>
+			esunbank.esundoc.action.memoDownloadServlet
+		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CompareUserIDServlet</servlet-name>
+		<url-pattern>/common/CompareUserIDServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UpdSysUserServlet</servlet-name>
+		<url-pattern>/manager/UpdSysUserServlet</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet-mapping>
+		<servlet-name>AddDocCtlServlet</servlet-name>
+		<url-pattern>/createDocCtl/AddDocCtlServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>AddDocDtlServlet</servlet-name>
+		<url-pattern>/query/AddDocDtlServlet</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet-mapping>
+		<servlet-name>FileDownloadServlet</servlet-name>
+		<url-pattern>/query/FileDownloadServlet</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet-mapping>
+		<servlet-name>AddSysUserServlet</servlet-name>
+		<url-pattern>/manager/AddSysUserServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>AddDocTypeServlet</servlet-name>
+		<url-pattern>/createDocCtl/AddDocTypeServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>UpdUserAuthServlet</servlet-name>
+		<url-pattern>/manager/UpdUserAuthServlet</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet-mapping>
+		<servlet-name>DeleteDocDtlServlet</servlet-name>
+		<url-pattern>/query/DeleteDocDtlServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>DymaticDocTypeServlet</servlet-name>
+		<url-pattern>/query/DymaticDocTypeServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>ManageDocTypeServlet</servlet-name>
+		<url-pattern>/manager/ManageDocTypeServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>DeleteDocCtlServlet</servlet-name>
+		<url-pattern>/query/DeleteDocCtlServlet</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>memoDownloadServlet</servlet-name>
+		<url-pattern>/query/memoDownloadServlet</url-pattern>
+	</servlet-mapping>
+
+
+</web-app> 
+  
