@@ -1,34 +1,34 @@
-package esunbank.esundoc.entity;
+package entity;
 
 public class UserAuth {
 
-    private String Uid;
+	private String Uid;
 
-    private String DocID;
-    
-    private String DocAuth;
+	private String DocID;
 
-    public String getUid() {
-        return Uid;
-    }
+	private String DocAuth;
 
-    public void setUid(String uid) {
-        Uid = uid;
-    }
+	public String getUid() {
+		return Uid;
+	}
 
-    public String getDocID() {
-        return DocID;
-    }
+	public void setUid(String uid) {
+		Uid = uid;
+	}
 
-    public void setDocID(String docID) {
-        DocID = docID;
-    }
+	public String getDocID() {
+		return DocID;
+	}
 
-    public String getDocAuth() {
-        return DocAuth;
-    }
+	public void setDocID(String docID) {
+		DocID = docID;
+	}
 
-    public void setDocAuth(String docAuth) {
-        DocAuth = docAuth;
-    }    
+	public String getDocAuth() {
+		return DocAuth;
+	}
+
+	public void setDocAuth(String docAuth) {
+		DocAuth = docAuth;
+	}
 }

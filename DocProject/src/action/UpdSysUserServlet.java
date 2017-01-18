@@ -1,4 +1,4 @@
-package esunbank.esundoc.action;
+package action;
 
 import java.io.IOException;
 
@@ -8,56 +8,53 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import esunbank.esundoc.bo.EsunDocBo;
-import esunbank.esundoc.entity.SysUser;
-import esunbank.esundoc.util.Const;
-import esunbank.esunutil.StringUtil;
+import bo.DocBo;
+import entity.SysUser;
+import util.Const;
 
 public class UpdSysUserServlet extends HttpServlet {
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        HttpSession session = request.getSession(true);
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-        if (session.getAttribute("user_Auth") == null
-                || !session.getAttribute("user_Auth").equals(Const.Manager)) {
-            response.sendRedirect("../common/logout.jsp");
-            return;
-        }
-        String url = "../manager/list.jsp?mes=success";
-        EsunDocBo bo = null;
-        try {
-            SysUser sysUser = null;
-            sysUser = new SysUser();
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(true);
 
-            sysUser.setUid(request.getParameter("Uid") != null ? request
-                    .getParameter("Uid").trim() : "");
+		if (session.getAttribute("user_Auth") == null || !session.getAttribute("user_Auth").equals(Const.Manager)) {
+			response.sendRedirect("../common/logout.jsp");
+			return;
+		}
+		String url = "../manager/list.jsp?mes=success";
+		DocBo bo = null;
+		try {
+			SysUser sysUser = null;
+			sysUser = new SysUser();
 
-            sysUser.setIsAction(request.getParameter("IsAction") != null ? request
-                    .getParameter("IsAction").trim() : "");
+			sysUser.setUid(request.getParameter("Uid") != null ? request.getParameter("Uid").trim() : "");
 
-            sysUser.setUserName(request.getParameter("user_No") != null ? request
-                    .getParameter("user_No").trim() : "");
+			sysUser.setIsAction(
+					request.getParameter("IsAction") != null ? request.getParameter("IsAction").trim() : "");
 
-            if (sysUser.getUid().equals("") || sysUser.getIsAction().equals("")
-                    || sysUser.getUserName().equals("")) {
-                url = "../manager/list.jsp?mes=fail";
-            } else {
-                bo = new EsunDocBo();
-                bo.uptSysUser(sysUser); // 去更新使用者table
-            }
-        } catch (Exception e) {
-            url = "../manager/list.jsp?mes=fail";
-            Const.logUtil.Error(
-                    "更新SysUserTable錯誤：" + StringUtil.getStackTraceASString(e),
-                    true);
-        } finally {
-            try {
-                bo.disconnect();
-            } catch (Exception e) {
-            }
-        }
-        response.sendRedirect(url);
-        return;
-    }
+			sysUser.setUserName(request.getParameter("user_No") != null ? request.getParameter("user_No").trim() : "");
+
+			if (sysUser.getUid().equals("") || sysUser.getIsAction().equals("") || sysUser.getUserName().equals("")) {
+				url = "../manager/list.jsp?mes=fail";
+			} else {
+				bo = new DocBo();
+				bo.uptSysUser(sysUser); // 去更新使用者table
+			}
+		} catch (Exception e) {
+			url = "../manager/list.jsp?mes=fail";
+			Const.logUtil.info("更新SysUserTable錯誤：");
+		} finally {
+			try {
+				bo.disconnect();
+			} catch (Exception e) {
+			}
+		}
+		response.sendRedirect(url);
+		return;
+	}
 }

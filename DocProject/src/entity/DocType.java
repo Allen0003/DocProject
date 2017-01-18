@@ -1,36 +1,36 @@
 //package esunbank.esundoc.entity;
-package esunbank.esundoc.entity;
+package entity;
 
 public class DocType {
 
-    private int TypeID;
+	private int TypeID;
 
-    private String TypeName;
+	private String TypeName;
 
-    private String Sysid;
+	private String Sysid;
 
-    public String getSysid() {
-        return Sysid;
-    }
+	public String getSysid() {
+		return Sysid;
+	}
 
-    public void setSysid(String sysid) {
-        Sysid = sysid;
-    }
+	public void setSysid(String sysid) {
+		Sysid = sysid;
+	}
 
-    public int getTypeID() {
-        return TypeID;
-    }
+	public int getTypeID() {
+		return TypeID;
+	}
 
-    public void setTypeID(int typeID) {
-        TypeID = typeID;
-    }
+	public void setTypeID(int typeID) {
+		TypeID = typeID;
+	}
 
-    public String getTypeName() {
-        return TypeName;
-    }
+	public String getTypeName() {
+		return TypeName;
+	}
 
-    public void setTypeName(String typeName) {
-        TypeName = typeName;
-    }
+	public void setTypeName(String typeName) {
+		TypeName = typeName;
+	}
 
 }

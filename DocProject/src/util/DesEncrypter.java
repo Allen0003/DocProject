@@ -1,4 +1,4 @@
-package esunbank.esundoc.util;
+package util;
 
 /**
  * <p>Title: </p>
@@ -23,8 +23,7 @@ public class DesEncrypter {
 			if (strInput.getBytes("UTF8").length % 8 != 0) {
 				fillCount = 8 - (strInput.getBytes("UTF8").length % 8);
 			}
-			byte[] input = fillToken(strInput, ' ', fillCount, 'r').getBytes(
-					"UTF8");
+			byte[] input = fillToken(strInput, ' ', fillCount, 'r').getBytes("UTF8");
 			byte[] keyBytes = strKey.getBytes("UTF8");
 
 			SecretKeySpec key = new SecretKeySpec(keyBytes, "TripleDES");
@@ -42,8 +41,7 @@ public class DesEncrypter {
 		return null;
 	}
 
-	public static String decrypt(String strData, String strKey)
-			throws Exception {
+	public static String decrypt(String strData, String strKey) throws Exception {
 		try {
 			Security.addProvider(new com.sun.crypto.provider.SunJCE());
 			byte[] keyBytes = strKey.getBytes("UTF8");
@@ -73,8 +71,7 @@ public class DesEncrypter {
 	 * strInput:块﹃ strToken:饼恶干じ num:恶干じ计 position:恶干よ'r'干ㄤ緇オ干 return
 	 * 恶干Ч﹃
 	 */
-	public static String fillToken(String strInput, char token, int num,
-			char position) { // 干じ
+	public static String fillToken(String strInput, char token, int num, char position) { // 干じ
 		String strOutput = strInput;
 		if (strInput != null && num >= 0) {
 			for (int i = 0; i < num; i++) {

@@ -1,4 +1,4 @@
-package esunbank.esundoc.util;
+package util;
 
 import java.io.IOException;
 
@@ -54,7 +54,7 @@ public class SetCharacterEncodingFilter implements Filter {
 	protected String selectEncoding(ServletRequest request) {
 		return (this.encoding);
 	}
-	
+
 	/**
 	 * ¤¤¤å¶Ã½XÂà´«
 	 */
@@ -75,6 +75,5 @@ public class SetCharacterEncodingFilter implements Filter {
 	public static String toISOString(String s) throws Exception {
 		return new String(s.getBytes(), "ISO-8859-1");
 	}
-
 
 }

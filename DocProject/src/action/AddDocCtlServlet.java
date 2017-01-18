@@ -1,4 +1,4 @@
-package esunbank.esundoc.action;
+package action;
 
 import java.io.IOException;
 
@@ -8,12 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import esunbank.esundoc.bo.EsunDocBo;
-import esunbank.esundoc.entity.DocCtl;
-import esunbank.esundoc.util.Const;
-import esunbank.esunutil.StringUtil;
+import bo.DocBo;
+import entity.DocCtl;
+import util.Const;
 
 public class AddDocCtlServlet extends HttpServlet {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -25,10 +29,10 @@ public class AddDocCtlServlet extends HttpServlet {
 			return;
 		}
 
-		EsunDocBo bo = null;
+		DocBo bo = null;
 		String url = "../query/list.jsp?mes=success";
 		try {
-			// aaa
+			// aaaa
 			DocCtl docCtl = new DocCtl();
 			docCtl.setDocID(Const.getKey(Const.DocID_Type_Ctl));
 
@@ -46,13 +50,13 @@ public class AddDocCtlServlet extends HttpServlet {
 			if (docCtl.getDocName().equals("") || docCtl.getSysid().equals("")) {
 				url = "../query/list.jsp?mes=fail";
 			} else {
-				bo = new EsunDocBo();
+				bo = new DocBo();
 				bo.addDocCtl(docCtl);
 			}
 
 		} catch (Exception e) {
 			url = "../query/list.jsp?mes=fail";
-			Const.logUtil.Error("AddDocCtlServlet ¿ù»~¡G" + StringUtil.getStackTraceASString(e), true);
+			Const.logUtil.info("AddDocCtlServlet ¿ù»~¡G");
 		} finally {
 			try {
 				bo.disconnect();

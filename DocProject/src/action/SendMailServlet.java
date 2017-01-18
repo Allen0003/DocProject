@@ -1,4 +1,4 @@
-package esunbank.esundoc.action;
+package action;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,147 +9,136 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import esunbank.esundoc.bo.EsunDocBo;
-import esunbank.esundoc.entity.DocDtl;
-import esunbank.esundoc.util.Const;
+import bo.DocBo;
+import entity.DocDtl;
 import esunbank.esunutil.CommonUser;
 import esunbank.esunutil.CommonUtil;
-import esunbank.esunutil.StringUtil;
 import esunbank.esunutil.info.MailUtil;
+import util.Const;
 
 public class SendMailServlet extends HttpServlet {
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        HttpSession session = request.getSession(true);
-        boolean getout = true;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-        if (session.getAttribute("user_Auth") == null
-                || session.getAttribute("DocAuth") == null) {
-            getout = true;
-        }
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(true);
+		boolean getout = true;
 
-        String docID = request.getParameter("docID") != null ? request
-                .getParameter("docID").trim() : "";
+		if (session.getAttribute("user_Auth") == null || session.getAttribute("DocAuth") == null) {
+			getout = true;
+		}
 
-        String[] identifyDocAuth = ((String) session.getAttribute("DocAuth"))
-                .split("\\+");
+		String docID = request.getParameter("docID") != null ? request.getParameter("docID").trim() : "";
 
-        String[] identifydocID = ((String) session.getAttribute("DocID"))
-                .split("\\+");
+		String[] identifyDocAuth = ((String) session.getAttribute("DocAuth")).split("\\+");
 
-        if (session.getAttribute("user_Auth").equals(Const.Manager)) {
-            getout = false;
-        } else if (docID != null) {
-            for (int i = 0; i < identifydocID.length; i++) {
-                if (identifydocID[i].equals(docID)) { // 找到傳進來的那一筆
-                    if (identifyDocAuth[i].equals(Const.Manager)) {
-                        getout = false;
-                    }
-                }
-            }
-        }
+		String[] identifydocID = ((String) session.getAttribute("DocID")).split("\\+");
 
-        if (getout) {
-            response.sendRedirect("../common/logout.jsp");
-            return;
-        }
+		if (session.getAttribute("user_Auth").equals(Const.Manager)) {
+			getout = false;
+		} else if (docID != null) {
+			for (int i = 0; i < identifydocID.length; i++) {
+				if (identifydocID[i].equals(docID)) { // 找到傳進來的那一筆
+					if (identifyDocAuth[i].equals(Const.Manager)) {
+						getout = false;
+					}
+				}
+			}
+		}
 
-        String url = "../query/list.jsp?mes=success";
-        EsunDocBo bo = null;
-        ArrayList<DocDtl> docDtls = null;
-        ArrayList<String> sendList = null;
-        String docName = null;
-        try {
+		if (getout) {
+			response.sendRedirect("../common/logout.jsp");
+			return;
+		}
 
-            String docSN = request.getParameter("docSN") != null ? request
-                    .getParameter("docSN").trim() : "";
-            if (docID.equals("")) {
-                url = "../query/list.jsp?mes=fail";
-            } else {
-                bo = new EsunDocBo();
-                docDtls = new ArrayList<DocDtl>();
-                sendList = new ArrayList<String>();
-                sendList = bo.getSendList(docID);
-                docName = bo.getDocName(docID);
-                if (docSN.equals("")) { // 要撈DocCtl
-                    docDtls = bo.getDocDtl(docID);
-                } else if (!docSN.equals("")) { // 只撈一個
-                    docDtls.add(bo.getDocDtl(docID, docSN));
-                    url = "../query/dtl.jsp?mes=success&DocID=" + docID;
-                }
-            }
+		String url = "../query/list.jsp?mes=success";
+		DocBo bo = null;
+		ArrayList<DocDtl> docDtls = null;
+		ArrayList<String> sendList = null;
+		String docName = null;
+		try {
 
-            String subject = "";
-            String content = "";
-            if (docDtls.size() == 0) {
-                url = "../query/list.jsp?mes=nodata";
-                response.sendRedirect(url);
-                return;
-            } else if (docDtls.size() != 0) { // 真的要寄信了
-                subject = "EsunDoc文件更新通知~" + docName;
-                content += "<table  width=\"900\" bgcolor=\"#00755e\" "
-                        + "cellpadding=\"3\" border = \"1\"  bordercolor =\"#00755e\" "
-                        + "cellspacing=\"1\" ALIGN=\"center\" VALIGN=\"center\">";
+			String docSN = request.getParameter("docSN") != null ? request.getParameter("docSN").trim() : "";
+			if (docID.equals("")) {
+				url = "../query/list.jsp?mes=fail";
+			} else {
+				bo = new DocBo();
+				docDtls = new ArrayList<DocDtl>();
+				sendList = new ArrayList<String>();
+				sendList = bo.getSendList(docID);
+				docName = bo.getDocName(docID);
+				if (docSN.equals("")) { // 要撈DocCtl
+					docDtls = bo.getDocDtl(docID);
+				} else if (!docSN.equals("")) { // 只撈一個
+					docDtls.add(bo.getDocDtl(docID, docSN));
+					url = "../query/dtl.jsp?mes=success&DocID=" + docID;
+				}
+			}
 
-                content += "<tr><td  bgcolor = \"#00755e\" colspan = \"9\" align  = \"center\" valign = \"center\"> ";
+			String subject = "";
+			String content = "";
+			if (docDtls.size() == 0) {
+				url = "../query/list.jsp?mes=nodata";
+				response.sendRedirect(url);
+				return;
+			} else if (docDtls.size() != 0) { // 真的要寄信了
+				subject = "EsunDoc文件更新通知~" + docName;
+				content += "<table  width=\"900\" bgcolor=\"#00755e\" "
+						+ "cellpadding=\"3\" border = \"1\"  bordercolor =\"#00755e\" "
+						+ "cellspacing=\"1\" ALIGN=\"center\" VALIGN=\"center\">";
 
-                content += "<font color = \"ffffff\">" + docName
-                        + "</font></td></tr>";
+				content += "<tr><td  bgcolor = \"#00755e\" colspan = \"9\" align  = \"center\" valign = \"center\"> ";
 
-                content += "<tr><td colspan = \"3\"  bgcolor = \"#f0ffe3\">"
-                        + "檔案" + "</td>";
-                content += "<td colspan = \"3\"  bgcolor = \"#f0ffe3\">"
-                        + "異動人員" + "</td>";
-                content += "<td colspan = \"3\"  bgcolor = \"#f0ffe3\">"
-                        + "異動時間 " + "</td></tr>";
+				content += "<font color = \"ffffff\">" + docName + "</font></td></tr>";
 
-                for (int i = 0; i < docDtls.size(); i++) {
-                    content += "<tr><td colspan = \"3\"  bgcolor = \"#ffffff\">"
-                            + docDtls.get(i).getFileName() + "</td>";
-                    content += "<td colspan = \"3\"  bgcolor = \"#ffffff\">"
-                            + new esunbank.esunutil.CommonUtil().getCommonUser(
-                                    docDtls.get(i).getSysid()).getEMCNM()
-                            + "</td>";
-                    content += "<td colspan = \"3\"  bgcolor = \"#ffffff\">"
-                            + docDtls.get(i).getSysdt() + "</td></tr>";
+				content += "<tr><td colspan = \"3\"  bgcolor = \"#f0ffe3\">" + "檔案" + "</td>";
+				content += "<td colspan = \"3\"  bgcolor = \"#f0ffe3\">" + "異動人員" + "</td>";
+				content += "<td colspan = \"3\"  bgcolor = \"#f0ffe3\">" + "異動時間 " + "</td></tr>";
 
-                }
-            }
+				for (int i = 0; i < docDtls.size(); i++) {
+					content += "<tr><td colspan = \"3\"  bgcolor = \"#ffffff\">" + docDtls.get(i).getFileName()
+							+ "</td>";
+					content += "<td colspan = \"3\"  bgcolor = \"#ffffff\">"
+							+ new esunbank.esunutil.CommonUtil().getCommonUser(docDtls.get(i).getSysid()).getEMCNM()
+							+ "</td>";
+					content += "<td colspan = \"3\"  bgcolor = \"#ffffff\">" + docDtls.get(i).getSysdt() + "</td></tr>";
 
-            content += "</table>";
-            String combine = "";
-            CommonUser commonUser = null;
+				}
+			}
 
-            for (int i = 0; i < sendList.size(); i++) { // 找一下寄信的人
+			content += "</table>";
+			String combine = "";
+			CommonUser commonUser = null;
 
-                commonUser = new CommonUtil().getCommonUser(sendList.get(i));
-                if (commonUser.getEMAIL() != null
-                        && commonUser.getEMAIL().contains("@")) {
-                    combine += commonUser.getEMAIL() + ",";
-                }
-            }
+			for (int i = 0; i < sendList.size(); i++) { // 找一下寄信的人
 
-            if (!combine.equals("")) {
-                combine = combine.substring(0, combine.length() - 1);
+				commonUser = new CommonUtil().getCommonUser(sendList.get(i));
+				if (commonUser.getEMAIL() != null && commonUser.getEMAIL().contains("@")) {
+					combine += commonUser.getEMAIL() + ",";
+				}
+			}
 
-                System.out.println("combine = " + combine);
-                combine = "apss-14105@email.esunbank.com.tw";
-                new MailUtil().isSendMail(combine.split(","), null, null, null,
-                        subject, content, null);
-            }
+			if (!combine.equals("")) {
+				combine = combine.substring(0, combine.length() - 1);
 
-        } catch (Exception e) {
-            url = "../query/list.jsp?mes=fail";
-            Const.logUtil.Error(
-                    "發送郵件錯誤：" + StringUtil.getStackTraceASString(e), true);
-        } finally {
-            try {
-                bo.disconnect();
-            } catch (Exception e) {
-            }
-        }
-        response.sendRedirect(url);
-        return;
-    }
+				System.out.println("combine = " + combine);
+				combine = "apss-14105@email.esunbank.com.tw";
+				new MailUtil().isSendMail(combine.split(","), null, null, null, subject, content, null);
+			}
+
+		} catch (Exception e) {
+			url = "../query/list.jsp?mes=fail";
+			Const.logUtil.info("發送郵件錯誤：");
+		} finally {
+			try {
+				bo.disconnect();
+			} catch (Exception e) {
+			}
+		}
+		response.sendRedirect(url);
+		return;
+	}
 }
