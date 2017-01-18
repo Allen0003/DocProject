@@ -5,7 +5,7 @@
 <web-app>
 	<filter>
 		<filter-name>Set Character Encoding</filter-name>
-		<filter-class>esunbank.esundoc.util.SetCharacterEncodingFilter</filter-class>
+		<filter-class>util.SetCharacterEncodingFilter</filter-class>
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>UTF-8</param-value>
@@ -19,7 +19,7 @@
 	<servlet>
 		<servlet-name>InitService</servlet-name>
 		<servlet-class>
-			esunbank.esundoc.util.InitService
+			util.InitService
 		</servlet-class>
 		<init-param>
 			<param-name>dB_ServerIP</param-name> <!-- DB address -->
@@ -31,7 +31,7 @@
 		</init-param>
 		<init-param>
 			<param-name>dB_PassWD_IV</param-name> <!-- DB password -->
-			<param-value>131313</param-value>
+			<param-value>13131313</param-value>
 		</init-param>
 		<init-param>
 			<param-name>dB_DatabaseName</param-name> <!-- DB Name -->
@@ -65,7 +65,7 @@
 			UpdSysUserServlet
 		</servlet-name>
 		<servlet-class>
-			esunbank.esundoc.action.UpdSysUserServlet
+			action.UpdSysUserServlet
 		</servlet-class>
 	</servlet>
 
@@ -74,7 +74,7 @@
 			AddSysUserServlet
 		</servlet-name>
 		<servlet-class>
-			esunbank.esundoc.action.AddSysUserServlet
+			action.AddSysUserServlet
 		</servlet-class>
 	</servlet>
 
@@ -83,7 +83,7 @@
 			AddDocTypeServlet
 		</servlet-name>
 		<servlet-class>
-			esunbank.esundoc.action.AddDocTypeServlet
+			action.AddDocTypeServlet
 		</servlet-class>
 	</servlet>
 
@@ -92,7 +92,7 @@
 			CompareUserIDServlet
 		</servlet-name>
 		<servlet-class>
-			esunbank.esundoc.action.CompareUserIDServlet
+			action.CompareUserIDServlet
 		</servlet-class>
 	</servlet>
 
@@ -101,7 +101,7 @@
 			AddDocCtlServlet
 		</servlet-name>
 		<servlet-class>
-			esunbank.esundoc.action.AddDocCtlServlet
+			action.AddDocCtlServlet
 		</servlet-class>
 	</servlet>
 
@@ -110,7 +110,7 @@
 			AddDocDtlServlet
 		</servlet-name>
 		<servlet-class>
-			esunbank.esundoc.action.AddDocDtlServlet
+			action.AddDocDtlServlet
 		</servlet-class>
 	</servlet>
 
@@ -120,7 +120,7 @@
 			FileDownloadServlet
 		</servlet-name>
 		<servlet-class>
-			esunbank.esundoc.action.FileDownloadServlet
+			action.FileDownloadServlet
 		</servlet-class>
 	</servlet>
 
@@ -130,7 +130,7 @@
 			UpdUserAuthServlet
 		</servlet-name>
 		<servlet-class>
-			esunbank.esundoc.action.UpdUserAuthServlet
+			action.UpdUserAuthServlet
 		</servlet-class>
 	</servlet>
 
@@ -139,34 +139,17 @@
 			DeleteDocDtlServlet
 		</servlet-name>
 		<servlet-class>
-			esunbank.esundoc.action.DeleteDocDtlServlet
+			action.DeleteDocDtlServlet
 		</servlet-class>
 	</servlet>
 
-	<servlet>
-		<servlet-name>
-			UpdUserForReadDocServlet
-		</servlet-name>
-		<servlet-class>
-			esunbank.esundoc.action.UpdUserForReadDocServlet
-		</servlet-class>
-	</servlet>
-
-
-  <servlet>
-    <servlet-name>FileToHistoryZoneServlet</servlet-name>
-    <servlet-class>
-			esunbank.esundoc.action.FileToHistoryZoneServlet
-		</servlet-class>
-  </servlet>  	
-	
 
 	<servlet>
 		<servlet-name>
 			DymaticDocTypeServlet
 		</servlet-name>
 		<servlet-class>
-			esunbank.esundoc.action.DymaticDocTypeServlet
+			action.DymaticDocTypeServlet
 		</servlet-class>
 	</servlet>
 
@@ -175,7 +158,7 @@
 			ManageDocTypeServlet
 		</servlet-name>
 		<servlet-class>
-			esunbank.esundoc.action.ManageDocTypeServlet
+			action.ManageDocTypeServlet
 		</servlet-class>
 	</servlet>
 
@@ -184,7 +167,7 @@
 			DeleteDocCtlServlet
 		</servlet-name>
 		<servlet-class>
-			esunbank.esundoc.action.DeleteDocCtlServlet
+			action.DeleteDocCtlServlet
 		</servlet-class>
 	</servlet>
 
@@ -193,22 +176,9 @@
 			memoDownloadServlet
 		</servlet-name>
 		<servlet-class>
-			esunbank.esundoc.action.memoDownloadServlet
+			action.memoDownloadServlet
 		</servlet-class>
 	</servlet>
-	
-
-	<servlet>
-		<servlet-name>
-			SendMailServlet
-		</servlet-name>
-		<servlet-class>
-			esunbank.esundoc.action.SendMailServlet
-		</servlet-class>
-	</servlet>	
-	
-	
-	
 	<servlet-mapping>
 		<servlet-name>CompareUserIDServlet</servlet-name>
 		<url-pattern>/common/CompareUserIDServlet</url-pattern>
@@ -227,11 +197,6 @@
 	<servlet-mapping>
 		<servlet-name>AddDocDtlServlet</servlet-name>
 		<url-pattern>/query/AddDocDtlServlet</url-pattern>
-	</servlet-mapping>
-
-	<servlet-mapping>
-		<servlet-name>UpdUserForReadDocServlet</servlet-name>
-		<url-pattern>/query/UpdUserForReadDocServlet</url-pattern>
 	</servlet-mapping>
 
 
@@ -282,15 +247,6 @@
 		<url-pattern>/query/memoDownloadServlet</url-pattern>
 	</servlet-mapping>
 
-  <servlet-mapping>
-    <servlet-name>FileToHistoryZoneServlet</servlet-name>
-    <url-pattern>/query/FileToHistoryZoneServlet</url-pattern>
-  </servlet-mapping>
-	
-  <servlet-mapping>
-    <servlet-name>SendMailServlet</servlet-name>
-    <url-pattern>/query/SendMailServlet</url-pattern>
-  </servlet-mapping>
-  	
+
 </web-app> 
   
