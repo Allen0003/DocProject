@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ page import="esunbank.esundoc.bo.*"%>
-<%@ page import="esunbank.esundoc.entity.*"%>
+<%@ page import="bo.*"%>
+<%@ page import="entity.*"%>
 <%@ page import="java.util.*"%>
 
 <!-- 管理者 文章與權限  介面-->
@@ -113,14 +113,14 @@ ul.tree li .checkbox {
 		</tr>
 		<!-- start -->
 		<%
-		    EsunDocBo bo = null;
+		    DocBo bo = null;
 			//這邊要撈資料庫
 			ArrayList <DocCtl> docCtl =new ArrayList <DocCtl>();
 			ArrayList <SysUser> sysUser = new ArrayList <SysUser>();	
 			ArrayList <UserAuth> userAuth = new ArrayList <UserAuth>();
 			
 			try{
-				bo = new EsunDocBo();
+				bo = new DocBo();
 			    docCtl = bo.getAllDocCtl();			    
 				sysUser = bo.getSysUser();				
 				userAuth = bo.getUserAuth();

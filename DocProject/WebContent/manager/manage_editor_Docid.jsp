@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ page import="esunbank.esundoc.bo.*"%>
-<%@ page import="esunbank.esundoc.entity.*"%>
+<%@ page import="bo.*"%>
+<%@ page import="entity.*"%>
 <%@ page import="java.util.*"%>
 
 <!-- 管理者 文章與權限  介面-->
@@ -107,7 +107,7 @@ table.sample td {
 		</tr>
 		<!-- start -->
 		<%
-		    EsunDocBo bo = null;
+		    DocBo bo = null;
 		    String[] userDocId = null;
 		    Set<Integer> set_DocCtl = null;
 		    Iterator<Integer> it = null;
@@ -124,7 +124,7 @@ table.sample td {
 			//文章對使用者的權限
 			
 		    try {
-		        bo = new EsunDocBo();
+		        bo = new DocBo();
 		        //key  是員工編號            
 		        user_array_all_file = bo.getDocCtlandDocDtl(key); 
 		        //全部的文章

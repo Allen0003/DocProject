@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="esunbank.esundoc.bo.*"%>
-<%@ page import="esunbank.esundoc.entity.*"%>
+<%@ page import="bo.*"%>
+<%@ page import="entity.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="esunbank.esunutil.*"%>
-<%@ page import="esunbank.esundoc.util.*"%>
+<%@ page import="util.*"%>
 <%@ page import="esunbank.esunutil.StringUtil"%>
 
 
@@ -81,12 +81,12 @@
 </html>
 <%!void setSession(String user_id, HttpSession session) throws Exception {
         //用這邊撈資料庫	
-        EsunDocBo bo = null;
+        DocBo bo = null;
         SysUser user_data = null;
         String temp_DocID;
         String temp_DocAuth;   
         try { 
-            bo = new EsunDocBo();
+            bo = new DocBo();
             user_data = bo.getUserId(user_id);
             session.setAttribute("user_Auth", user_data.getAUTH());
             session.setAttribute("user_Name", 

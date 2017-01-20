@@ -1,8 +1,8 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ page import="esunbank.esundoc.bo.*"%>
-<%@ page import="esunbank.esundoc.entity.*"%>
+<%@ page import="bo.*"%>
+<%@ page import="entity.*"%>
 <%@ page import="java.util.*"%>
-<%@ page import="esunbank.esundoc.util.*"%>
+<%@ page import="util.*"%>
 <%@ page import="esunbank.esunutil.*"%>		
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -67,10 +67,10 @@
 				ArrayList <String> modufyName = null;
 				ArrayList <UserAuth> userAuths = null;
 				ArrayList<SysUser> sysUsers = null;
-				EsunDocBo bo = null;
+				DocBo bo = null;
 				try {
 
-					bo = new EsunDocBo();
+					bo = new DocBo();
 					userAuths = new ArrayList<UserAuth>();
 					userAuths = bo.getUserAuth(docID);
 					sysUsers = new ArrayList<SysUser>();

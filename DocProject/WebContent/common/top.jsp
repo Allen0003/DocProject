@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" import="esunbank.esundoc.util.*" %>	
+<%@ page language="java" contentType="text/html; charset=UTF-8" 
+import="util.*" %>	
 	<%
 	
 		if(session.getAttribute("user_Auth")==null){

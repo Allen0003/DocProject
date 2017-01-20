@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ page import="esunbank.esundoc.entity.*"%>
+<%@ page import="entity.*"%>
 
 <%@ page import="java.util.*"%>
 

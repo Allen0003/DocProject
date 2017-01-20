@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
-<%@ page import="esunbank.esundoc.bo.*"%>
-<%@ page import="esunbank.esundoc.entity.*"%>
+<%@ page import="bo.*"%>
+<%@ page import="entity.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="esunbank.esunutil.*"%>		
 <!-- 管理者  是否啟用  介面-->
@@ -131,11 +131,11 @@ table.sample td {
 					}
 				%>
 				<%
-					EsunDocBo bo = null;
+					DocBo bo = null;
 					ArrayList<SysUser> userAttributeArray = null;
 					int error_flag = 0 ;
 					try {
-						bo = new EsunDocBo();
+						bo = new DocBo();
 						userAttributeArray = bo.getSysUser();
 					} catch (Exception e) {
 							e.printStackTrace();

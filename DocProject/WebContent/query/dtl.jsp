@@ -1,5 +1,5 @@
-<%@ page import="esunbank.esundoc.bo.*"%>
-<%@ page import="esunbank.esundoc.entity.*"%>
+<%@ page import="bo.*"%>
+<%@ page import="entity.*"%>
 <%@ page import="java.util.*"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -259,7 +259,7 @@ a:hover {
 	<!-- 把Top include 近來  -->
 
 	<%
-	    EsunDocBo bo = null;
+	    DocBo bo = null;
 	    ArrayList<DocDtl> array_DocDtl = null;
 	    int error_flag = 0 ;
 		
@@ -288,7 +288,7 @@ a:hover {
 	            //如果超聯結的值在session 裡 或是 管理者
 	            if (turn_back == 0) { // 確保只會去撈一次資料庫
 	                try {
-	                    bo = new EsunDocBo();
+	                    bo = new DocBo();
 						if ( history.equals("T") ) {   //代表在歷史區
 							array_DocDtl = bo.getDocDtl(DocID,Const.DocID_For_In_Hiszone);
 						}  
